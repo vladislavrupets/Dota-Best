@@ -4,6 +4,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const apiRequests = require("./external-api/apiRequests");
+
 const PORT = process.env.PORT || 8000;
 const IP = process.env.IP || "localhost";
 const DB_LINK = process.env.DB_LINK;
@@ -27,6 +29,7 @@ async function start(port, ip, dbLink) {
     app.listen(port, ip, () => {
       console.log("server started on " + ip + ":" + port);
     });
+    await apiRequests.getMatch();
   } catch (err) {
     console.log(err);
   }
