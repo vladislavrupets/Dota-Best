@@ -1,4 +1,4 @@
-const Stats = require("../models/statsModel");
+const Stats = require("../models/matchModel");
 
 class StatusController {}
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 8000;
@@ -19,7 +20,10 @@ app.use(express.json());
 
 async function start(port, ip, dbLink) {
   try {
-    await mongoose.connect(dbLink);
+    await mongoose.connect(dbLink, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     app.listen(port, ip, () => {
       console.log("server started on " + ip + ":" + port);
     });
