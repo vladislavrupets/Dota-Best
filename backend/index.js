@@ -21,6 +21,8 @@ app.use(
 
 app.use(express.json());
 
+app.use("/matches", require("./routes/matchesRoutes"));
+
 async function start(port, ip, dbLink) {
   try {
     await mongoose.connect(dbLink, {
@@ -30,7 +32,6 @@ async function start(port, ip, dbLink) {
     app.listen(port, ip, () => {
       console.log("server started on " + ip + ":" + port);
     });
-    await writeLastParsedMatch();
   } catch (err) {
     console.log(err);
   }
