@@ -3,8 +3,9 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const axios = require("axios");
 
-const apiRequests = require("./external-api/apiRequests");
+const writeLastParsedMatch = require("./services/writeLastParsedMatch");
 
 const PORT = process.env.PORT || 8000;
 const IP = process.env.IP || "localhost";
@@ -29,7 +30,7 @@ async function start(port, ip, dbLink) {
     app.listen(port, ip, () => {
       console.log("server started on " + ip + ":" + port);
     });
-    await apiRequests.getMatch();
+    await writeLastParsedMatch();
   } catch (err) {
     console.log(err);
   }
